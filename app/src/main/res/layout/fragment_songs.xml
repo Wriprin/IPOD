@@ -9,6 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerView"
-        android:background="#505051"/>
+        android:background="#1C1C1C"/>
 
 </RelativeLayout>
