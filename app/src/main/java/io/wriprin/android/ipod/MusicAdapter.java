@@ -38,7 +38,6 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyVieHolder>
         this.mFiles = mFiles;
         this.mContext = mContext;
     }
-
     @NonNull
     @Override
     public MyVieHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
