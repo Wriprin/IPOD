@@ -1,10 +1,10 @@
-# IPOD Development Doc (EN)
+# **IPOD Development Doc**
 
-## > Read Songs From Phone Part - 1   
+# > Read Songs From Phone Part - 1   
 
 - ### commit the viewpagers and the style of tabindicator.
 
-### 1. download  the TabLayout.	[tip1](https://www.jianshu.com/p/fde38f367019), [tip2](https://www.cnblogs.com/duan-xue-bin/p/10059516.html)
+#### 1. Download  the TabLayout.	[Tip1](https://www.jianshu.com/p/fde38f367019), [Tip2](https://www.cnblogs.com/duan-xue-bin/p/10059516.html)
 
 ```xml
 <com.google.android.material.tabs.TabLayout
@@ -20,7 +20,7 @@
     app:tabIndicator="@drawable/tab_indicator"/>
 ```
 
-### 2. [ViewPager](https://blog.csdn.net/qq_20785431/article/details/80865500)
+#### 2. [ViewPager](https://blog.csdn.net/qq_20785431/article/details/80865500)
 
 ```xml
 <com.google.android.material.tabs.TabLayout
@@ -36,7 +36,7 @@
     app:tabIndicator="@drawable/tab_indicator"/>
 ```
 
-### 3. viewpageradapter  
+#### 3. Viewpageradapter  
 
 ```java
 public static class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -74,9 +74,11 @@ public static class ViewPagerAdapter extends FragmentPagerAdapter {
 }
 ```
 
-### 4.  create songsFragment.xml and albumFragment.xml
+#### 4.  New songsFragment.xml and albumFragment.xml
 
-### 5.  create tabindicator.xml to initialize its style
+- ##### [RecyclerView](https://blog.csdn.net/weixin_43468667/article/details/89435098?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160715478319195283043122%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160715478319195283043122&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-6-89435098.nonecase&utm_term=recyclerview&spm=1018.2118.3001.4449)
+
+#### 5.  New tabindicator.xml to initialize its style
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -87,11 +89,11 @@ public static class ViewPagerAdapter extends FragmentPagerAdapter {
 
 
 
-## > Read Songs From Phone Part - 2
+# **> Read Songs From Phone Part - 2**
 
-- ### add the permission of usage, fetch all the songs where from the storage to app.
+- ### Add the permission of usage, fetch all the songs where from the storage to app.
 
-### 1. Add permission in MainActivity.java
+#### 1. Add permission in MainActivity.java
 
 ```java
 @Override
@@ -115,13 +117,13 @@ private void permission() {
 }
 ```
 
-### 2. Add permission in AndroidMainfest.xml
+#### 2. Add permission in AndroidMainfest.xml
 
 ```xml
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
 
-###  3. Add onRequestPermissionsResult() in MainActivity.java
+####  3. Add onRequestPermissionsResult() in MainActivity.java
 
 ```java
 @Override
@@ -144,11 +146,11 @@ public void onRequestPermissionsResult(int requestCode, @NonNull String[] permis
 }
 ```
 
-### 4. create io.wriprin.android.ipod.MusicFiles to pack attributes of songs 
+#### 4. New io.wriprin.android.ipod.MusicFiles.java to pack attributes of songs 
 
 - #### notice about the short key, Alt + Insert to generate the constructor and the Getter, Setter;
 
-### 5. add ArrayList<Musicfiles>  getAllAudio  
+#### 5. Add ArrayList<Musicfiles>  getAllAudio  
 
 ```java
 public ArrayList<MusicFiles> getAllAudio (Context context)
@@ -194,7 +196,37 @@ public ArrayList<MusicFiles> getAllAudio (Context context)
 
 - [context.getContentResolver().query](https://blog.csdn.net/qqq3670279/article/details/51475899?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160715919119726885832985%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160715919119726885832985&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-51475899.nonecase&utm_term=getcontentresolver&spm=1018.2118.3001.4449)
 
-### 6. Globally define the MusicFiles to use it when user choose allow permission
+#### 6. Global definition the MusicFiles to use it when user choose allow permission
+
+# **> Read Songs From Phone Part - 3**
+
+- ### Display SongList
+
+#### 1. New layout resource files - music_items.xml to display the SongList
+
+#### 2. New io.wriprin.android.ipod.MusicAdapter.java  collect the info
+
+- ##### [ViewHolder()](https://www.cnblogs.com/wugu-ren/p/6106379.html)
+
+- ##### [Context()](https://blog.csdn.net/u013196348/article/details/94395205?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160716874619724839511869%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160716874619724839511869&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-3-94395205.nonecase&utm_term=context&spm=1018.2118.3001.4449)
+
+- ##### [Adapter()](https://blog.csdn.net/fznpcy/article/details/8658155?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160716922219724818061062%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160716922219724818061062&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-8658155.nonecase&utm_term=adapter&spm=1018.2118.3001.4449)
+
+- ##### [Inflater()](https://blog.csdn.net/qq_42376054/article/details/102509594?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160715644219721940212443%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160715644219721940212443&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-102509594.nonecase&utm_term=inflater&spm=1018.2118.3001.4449)
+
+- ##### [byte[]](https://blog.csdn.net/bzlj2912009596/article/details/79146622?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160717113419724813259611%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160717113419724813259611&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-79146622.nonecase&utm_term=android%20byte&spm=1018.2118.3001.4449)
+
+#### 3. Import [Glide](https://blog.csdn.net/xxdw1992/article/details/93624487?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160717011019724813279848%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160717011019724813279848&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-93624487.nonecase&utm_term=glide&spm=1018.2118.3001.4449) dependency to build.gradle (Module: app)
+
+```gradle
+//Glide
+implementation 'com.github.bumptech.glide:glide:4.11.0'
+annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+```
+
+#### 4. songsFragment.java - recyclerview match Adapter
+
+
 
 
 
