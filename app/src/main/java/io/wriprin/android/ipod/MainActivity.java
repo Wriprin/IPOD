@@ -42,19 +42,19 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         permission();
-
     }
 
     private void permission() {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED)
         {
+            //REQUEST_CODE default = 1;
             ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_CODE);
         }
         else
         {
+            Toast.makeText(this, "Permission Granted!", Toast.LENGTH_SHORT).show();
             musicFiles = getAllAudio(this);
             initViewPager();
         }
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
             {
                 //Do whatever you want permission related;
+                Toast.makeText(this, "Permission Granted!", Toast.LENGTH_SHORT).show();
                 musicFiles = getAllAudio(this);
                 initViewPager();
 
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    //Adapter for the viewpager
     public static class ViewPagerAdapter extends FragmentPagerAdapter {
         private ArrayList<Fragment> fragments;
         private ArrayList<String> titles;
@@ -116,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             return fragments.size();
         }
 
+
+        //ctrl+o to get the method to get the page title
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
