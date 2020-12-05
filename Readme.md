@@ -1,5 +1,7 @@
 # **IPOD Development Doc**
 
+[TOC]
+
 # > Read Songs From Phone Part - 1   
 
 - ### commit the viewpagers and the style of tabindicator.
