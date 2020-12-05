@@ -23,6 +23,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static io.wriprin.android.ipod.AlbumDetailsAdapter.albumFiles;
 import static io.wriprin.android.ipod.MainActivity.musicFiles;
 import static io.wriprin.android.ipod.MainActivity.repeatBoolean;
 import static io.wriprin.android.ipod.MainActivity.shuffleBoolean;
@@ -380,7 +381,15 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
 
     private void getIntentMethod() {
         position = getIntent().getIntExtra("position",-1);
-        listSongs = musicFiles;
+        String sender = getIntent().getStringExtra("sender");
+        if (sender != null && sender.equals("albumDetails"))
+        {
+            listSongs = albumFiles;
+        }
+        else
+        {
+            listSongs = musicFiles;
+        }
         if (listSongs != null)
         {
             playPauseBtn.setImageResource(R.drawable.ic_pause);
