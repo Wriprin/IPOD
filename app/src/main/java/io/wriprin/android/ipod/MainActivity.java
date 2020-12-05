@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
             {
                 //Do whatever you want permission related;
-                Toast.makeText(this, "Permission Granted!", Toast.LENGTH_SHORT).show();
                 musicFiles = getAllAudio(this);
                 initViewPager();
 

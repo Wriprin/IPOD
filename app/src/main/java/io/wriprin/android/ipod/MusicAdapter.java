@@ -45,6 +45,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyVieHolder>
         return new MyVieHolder(view);
     }
 
+    //pick the img while(a/b)
     @Override
     public void onBindViewHolder(@NonNull MyVieHolder holder, final int position) {
         holder.file_name.setText(mFiles.get(position).getTitle());
