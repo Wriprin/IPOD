@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,8 +20,25 @@
         app:tabIndicator="@drawable/tab_indicator"/>
 
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/viewpager"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tab_layout"
+        android:layout_alignBottom="@+id/frag_bottom_player"/>
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/frag_bottom_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="io.wriprin.android.ipod.NowPlayingFragmentBottom"
+            tools:layout="@layout/fragment_now_playing_bottom"/>
+
+    </FrameLayout>
+
+
+</RelativeLayout>
