@@ -1,6 +1,7 @@
 package io.wriprin.android.ipod;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.media.Image;
@@ -20,6 +21,7 @@ public class AlbumDetails extends AppCompatActivity {
     ImageView albumPhoto;
     String albumName;
     ArrayList<MusicFiles> albumSongs = new ArrayList<>();
+    AlbumDetailsAdapter albumDetailsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,19 @@ public class AlbumDetails extends AppCompatActivity {
             Glide.with(this)
                     .load(R.drawable.bewedoc)
                     .into(albumPhoto);
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!(albumSongs.size() < 1))
+        {
+            albumDetailsAdapter = new AlbumDetailsAdapter(this, albumSongs);
+            recyclerView.setAdapter(albumDetailsAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this,
+                    RecyclerView.VERTICAL, false));
         }
     }
 
