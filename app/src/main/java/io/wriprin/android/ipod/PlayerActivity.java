@@ -27,6 +27,7 @@ import static io.wriprin.android.ipod.AlbumDetailsAdapter.albumFiles;
 import static io.wriprin.android.ipod.MainActivity.musicFiles;
 import static io.wriprin.android.ipod.MainActivity.repeatBoolean;
 import static io.wriprin.android.ipod.MainActivity.shuffleBoolean;
+import static io.wriprin.android.ipod.MusicAdapter.mFiles;
 
 public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
 
@@ -388,7 +389,7 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
         }
         else
         {
-            listSongs = musicFiles;
+            listSongs = mFiles;
         }
         if (listSongs != null)
         {
