@@ -48,7 +48,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyVieHolder>
     @Override
     public void onBindViewHolder(@NonNull MyVieHolder holder, final int position) {
         holder.file_name.setText(mFiles.get(position).getTitle());
-        byte[] image = getAmbumArt(mFiles.get(position).getPath());
+        byte[] image = getAlbumArt(mFiles.get(position).getPath());
         if (image != null)
         {
             Glide.with(mContext).asBitmap()
@@ -130,7 +130,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyVieHolder>
         }
     }
 
-    private byte[] getAmbumArt(String uri)
+    private byte[] getAlbumArt(String uri)
     {
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(uri);

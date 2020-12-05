@@ -1,6 +1,7 @@
 package io.wriprin.android.ipod;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.media.MediaMetadataRetriever;
 import android.text.Layout;
@@ -34,9 +35,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyHolder holder, final int position) {
         holder.album_name.setText(albumFiles.get(position).getAlbum());
-        byte[] image = getAmbumArt(albumFiles.get(position).getPath());
+        byte[] image = getAlbumArt(albumFiles.get(position).getPath());
         if (image != null)
         {
             Glide.with(mContext).asBitmap()
@@ -48,6 +49,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyHolder> {
                     .load(R.drawable.bewedoc)
                     .into(holder.album_image);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, AlbumDetails.class);
+                intent.putExtra("albumName", albumFiles.get(position).getAlbum());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -65,7 +74,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyHolder> {
         }
     }
 
-    private byte[] getAmbumArt(String uri)
+    private byte[] getAlbumArt(String uri)
     {
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(uri);
