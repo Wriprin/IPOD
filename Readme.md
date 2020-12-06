@@ -1,11 +1,10 @@
 * [<strong>IPOD Development Doc</strong>](#ipod-development-doc)
 * [&gt; Read Songs From Phone Part \- 1](#-read-songs-from-phone-part---1)
   * [commit the viewpagers and the style of tabindicator\.](#commit-the-viewpagers-and-the-style-of-tabindicator)
-    * [1\. Download  the TabLayout\.  <a href="https://www\.jianshu\.com/p/fde38f367019" rel="nofollow">Tip1</a>, <a href="https://www\.cnblogs\.com/duan\-xue\-bin/p/10059516\.html" rel="nofollow">Tip2</a>](#1-download--the-tablayouttip1-tip2)
+    * [1\. Download  the TabLayout\. ](#1-download--the-tablayouttip1-tip2)
     * [2\. <a href="https://blog\.csdn\.net/qq\_20785431/article/details/80865500" rel="nofollow">ViewPager</a>](#2-viewpager)
     * [3\. Viewpageradapter](#3-viewpageradapter)
     * [4\.  New songsFragment\.xml and albumFragment\.xml](#4--new-songsfragmentxml-and-albumfragmentxml)
-      * [<a href="https://blog\.csdn\.net/weixin\_43468667/article/details/89435098?ops\_request\_misc=%257B%2522request%255Fid%2522%253A%2522160715478319195283043122%2522%252C%2522scm%2522%253A%252220140713\.130102334\.\.%2522%257D&amp;request\_id=160715478319195283043122&amp;biz\_id=0&amp;utm\_medium=distribute\.pc\_search\_result\.none\-task\-blog\-2~all~baidu\_landing\_v2~default\-6\-89435098\.nonecase&amp;utm\_term=recyclerview&amp;spm=1018\.2118\.3001\.4449" rel="nofollow">RecyclerView</a>](#recyclerview)
     * [5\.  New tabindicator\.xml to initialize its style](#5--new-tabindicatorxml-to-initialize-its-style)
 * [<strong>&gt; Read Songs From Phone Part \- 2</strong>](#-read-songs-from-phone-part---2)
   * [Add the permission of usage, fetch all the songs where from the storage to app\.](#add-the-permission-of-usage-fetch-all-the-songs-where-from-the-storage-to-app)
@@ -20,11 +19,6 @@
   * [Display SongList](#display-songlist)
     * [1\. New layout resource files \- music\_items\.xml to display the SongList](#1-new-layout-resource-files---music_itemsxml-to-display-the-songlist)
     * [2\. New io\.wriprin\.android\.ipod\.MusicAdapter\.java  collect the info](#2-new-iowriprinandroidipodmusicadapterjava--collect-the-info)
-      * [<a href="https://www\.cnblogs\.com/wugu\-ren/p/6106379\.html" rel="nofollow">ViewHolder()</a>](#viewholder)
-      * [<a href="https://blog\.csdn\.net/u013196348/article/details/94395205?ops\_request\_misc=%257B%2522request%255Fid%2522%253A%2522160716874619724839511869%2522%252C%2522scm%2522%253A%252220140713\.130102334\.\.%2522%257D&amp;request\_id=160716874619724839511869&amp;biz\_id=0&amp;utm\_medium=distribute\.pc\_search\_result\.none\-task\-blog\-2~all~top\_click~default\-3\-94395205\.nonecase&amp;utm\_term=context&amp;spm=1018\.2118\.3001\.4449" rel="nofollow">Context()</a>](#context)
-      * [<a href="https://blog\.csdn\.net/fznpcy/article/details/8658155?ops\_request\_misc=%257B%2522request%255Fid%2522%253A%2522160716922219724818061062%2522%252C%2522scm%2522%253A%252220140713\.130102334\.\.%2522%257D&amp;request\_id=160716922219724818061062&amp;biz\_id=0&amp;utm\_medium=distribute\.pc\_search\_result\.none\-task\-blog\-2~all~top\_click~default\-1\-8658155\.nonecase&amp;utm\_term=adapter&amp;spm=1018\.2118\.3001\.4449" rel="nofollow">Adapter()</a>](#adapter)
-      * [<a href="https://blog\.csdn\.net/qq\_42376054/article/details/102509594?ops\_request\_misc=%257B%2522request%255Fid%2522%253A%2522160715644219721940212443%2522%252C%2522scm%2522%253A%252220140713\.130102334\.\.%2522%257D&amp;request\_id=160715644219721940212443&amp;biz\_id=0&amp;utm\_medium=distribute\.pc\_search\_result\.none\-task\-blog\-2~all~top\_click~default\-1\-102509594\.nonecase&amp;utm\_term=inflater&amp;spm=1018\.2118\.3001\.4449" rel="nofollow">Inflater()</a>](#inflater)
-      * [<a href="https://blog\.csdn\.net/bzlj2912009596/article/details/79146622?ops\_request\_misc=%257B%2522request%255Fid%2522%253A%2522160717113419724813259611%2522%252C%2522scm%2522%253A%252220140713\.130102334\.\.%2522%257D&amp;request\_id=160717113419724813259611&amp;biz\_id=0&amp;utm\_medium=distribute\.pc\_search\_result\.none\-task\-blog\-2~all~sobaiduend~default\-2\-79146622\.nonecase&amp;utm\_term=android%20byte&amp;spm=1018\.2118\.3001\.4449" rel="nofollow">byte[]</a>](#byte)
     * [3\. Import <a href="https://blog\.csdn\.net/xxdw1992/article/details/93624487?ops\_request\_misc=%257B%2522request%255Fid%2522%253A%2522160717011019724813279848%2522%252C%2522scm%2522%253A%252220140713\.130102334\.\.%2522%257D&amp;request\_id=160717011019724813279848&amp;biz\_id=0&amp;utm\_medium=distribute\.pc\_search\_result\.none\-task\-blog\-2~all~top\_click~default\-1\-93624487\.nonecase&amp;utm\_term=glide&amp;spm=1018\.2118\.3001\.4449" rel="nofollow">Glide</a> dependency to build\.gradle (Module: app)](#3-import-glide-dependency-to-buildgradle-module-app)
     * [4\. songsFragment\.java \- recyclerview match Adapter](#4-songsfragmentjava---recyclerview-match-adapter)
 
@@ -255,6 +249,42 @@ annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 ```
 
 #### 4. songsFragment.java - recyclerview match Adapter
+
+# **> Read Songs From Phone Part - 4**
+
+- ##### Commit the layout of PlayerActivity
+
+#### 1. Add the Vector Assest which under drawable and change to a suitable color.
+
+![](http://cdn.jsdelivr.net/gh/Wriprin/Wriprin-Gallery/Gallery/VectorAssest.png)
+
+#### 2. New io.wriprin.android.ipod.PlayerActivity(EmptyActivity)
+
+#### 3. New (Drawable Resource File ) - main_bg.xml
+
+- ##### RootElement is shape
+
+#### 4. New (Drawable Resource File ) - gradient.xml
+
+- ##### ImageView's [scaleType](https://blog.csdn.net/laoziyueguo3/article/details/48312347?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160721888519725271058745%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160721888519725271058745&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-3-48312347.pc_search_result_no_baidu_js&utm_term=scaletype&spm=1018.2118.3001.4449)
+
+- ##### [ellipsize](https://blog.csdn.net/imdxt1986/article/details/6942743?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160721921819724838541780%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160721921819724838541780&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-6942743.pc_search_result_no_baidu_js&utm_term=ellipsize&spm=1018.2118.3001.4449)
+
+#### 5. Add [FloatingActionButton](https://blog.csdn.net/gaolh89/article/details/79759404?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160721938819195271620070%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160721938819195271620070&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-79759404.pc_search_result_no_baidu_js&utm_term=FloatingActionButton&spm=1018.2118.3001.4449) in activity_player.xml
+
+```xml
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/play_pause"
+    android:src="@drawable/ic_play"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:focusable="true"
+    android:clickable="true"/>
+```
+
+- [why use focusable](https://blog.csdn.net/ckf1122/article/details/6269221?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
 
 
 
