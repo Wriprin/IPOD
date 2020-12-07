@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         }
         else
         {
-            Toast.makeText(this, "Permission Granted!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Permission Granted!", Toast.LENGTH_SHORT).show();
             musicFiles = getAllAudio(this);
             initViewPager();
         }

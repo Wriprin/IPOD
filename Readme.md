@@ -1,12 +1,8 @@
-[TOC]
-
-
-
 # **IPOD Development Doc**
 
 # > Read Songs From Phone Part - 1   
 
-- ### commit the viewpagers and the style of tabindicator.
+- ##### commit the viewpagers and the style of tabindicator.
 
 #### 1. Download  the TabLayout.	[Tip1](https://www.jianshu.com/p/fde38f367019), [Tip2](https://www.cnblogs.com/duan-xue-bin/p/10059516.html)
 
@@ -95,7 +91,7 @@ public static class ViewPagerAdapter extends FragmentPagerAdapter {
 
 # **> Read Songs From Phone Part - 2**
 
-- ### Add the permission of usage, fetch all the songs where from the storage to app.
+- ##### Add the permission of usage, fetch all the songs where from the storage to app.
 
 #### 1. Add permission in MainActivity.java
 
@@ -200,11 +196,11 @@ public ArrayList<MusicFiles> getAllAudio (Context context)
 
 - [context.getContentResolver().query](https://blog.csdn.net/qqq3670279/article/details/51475899?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160715919119726885832985%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160715919119726885832985&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-51475899.nonecase&utm_term=getcontentresolver&spm=1018.2118.3001.4449)
 
-#### 6. Global definition the MusicFiles to use it when user choose allow permission
+#### 6. Global Declaration the MusicFiles to use it when user choose allow permission
 
 # **> Read Songs From Phone Part - 3**
 
-- ### Display SongList
+- ##### Display SongList
 
 #### 1. New layout resource files - music_items.xml to display the SongList
 
@@ -230,7 +226,172 @@ annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
 #### 4. songsFragment.java - recyclerview match Adapter
 
+# **> Read Songs From Phone Part - 4**
+
+- ##### Commit the layout of PlayerActivity
+
+#### 1. Add the Vector Assest which under drawable and change to a suitable color.
+
+![](http://cdn.jsdelivr.net/gh/Wriprin/Wriprin-Gallery/Gallery/VectorAssest.png)
+
+#### 2. New io.wriprin.android.ipod.PlayerActivity(EmptyActivity)
+
+#### 3. New (Drawable Resource File ) - main_bg.xml
+
+- ##### RootElement is shape
+
+#### 4. New (Drawable Resource File ) - gradient.xml
+
+- ##### ImageView's [scaleType](https://blog.csdn.net/laoziyueguo3/article/details/48312347?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160721888519725271058745%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160721888519725271058745&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-3-48312347.pc_search_result_no_baidu_js&utm_term=scaletype&spm=1018.2118.3001.4449)
+
+- ##### [ellipsize](https://blog.csdn.net/imdxt1986/article/details/6942743?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160721921819724838541780%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160721921819724838541780&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-6942743.pc_search_result_no_baidu_js&utm_term=ellipsize&spm=1018.2118.3001.4449)
+
+#### 5. Add [FloatingActionButton](https://blog.csdn.net/gaolh89/article/details/79759404?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160721938819195271620070%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160721938819195271620070&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-79759404.pc_search_result_no_baidu_js&utm_term=FloatingActionButton&spm=1018.2118.3001.4449) in activity_player.xml
+
+```xml
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/play_pause"
+    android:src="@drawable/ic_play"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:focusable="true"
+    android:clickable="true"/>
+```
+
+- ##### [why use focusable](https://blog.csdn.net/ckf1122/article/details/6269221?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
+
+# **> Read Songs From Phone Part - 5 | PlayAudio**
+
+- ##### Commit the FUNC of [itemview](https://blog.csdn.net/kent_todo/article/details/41943935?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160722044019725271027060%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160722044019725271027060&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-41943935.pc_search_result_no_baidu_js&utm_term=itemview&spm=1018.2118.3001.4449).click
+
+#### 1. Add itemview.click in MusicAdapter.java
+
+```java
+holder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(mContext, PlayerActivity.class);
+        intent.putExtra("position",position);
+        mContext.startActivity(intent);
+    }
+});
+```
+
+#### 2. Add TimeLine's layout in activity_player.xml
+
+- ##### [SeekBar](https://blog.csdn.net/wu_kangjie/article/details/80145731?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160722074419195271695819%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160722074419195271695819&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-80145731.pc_search_result_no_baidu_js&utm_term=seekbar&spm=1018.2118.3001.4449)
+
+#### 3. Implement the Init FUNC of PlayerActivity.java
+
+- ##### Declare and assign
+
+#### 4. MusicAdapter.java to add [intent.putExtra()](https://blog.csdn.net/ching_zhi/article/details/53842302?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160722165919195265193358%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160722165919195265193358&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-4-53842302.pc_search_result_no_baidu_js&utm_term=putextra&spm=1018.2118.3001.4449)
+
+```java
+intent.putExtra("position",position);
+```
+
+- ##### [position](https://www.cnblogs.com/vus520/archive/2011/08/30/2561932.html)
+
+#### 5. PlayerActivity.java get the position from MusicAdapter.java
+
+```java
+position = getIntent().getIntExtra("position",-1);
+```
+
+- ##### [static](https://blog.csdn.net/guotianqing/article/details/79828100?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160722214719724838563346%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=160722214719724838563346&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~hot_rank-1-79828100.pc_search_result_no_baidu_js&utm_term=static%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8&spm=1018.2118.3001.4449)
+
+#### 6. Implement the method of playing
+
+```java
+private void getIntentMethod() {
+    position = getIntent().getIntExtra("position",-1);
+    String sender = getIntent().getStringExtra("sender");
+    if (sender != null && sender.equals("albumDetails"))
+    {
+        listSongs = albumFiles;
+    }
+    else
+    {
+        listSongs = mFiles;
+    }
+    if (listSongs != null)
+    {
+        playPauseBtn.setImageResource(R.drawable.ic_pause);
+        uri = Uri.parse(listSongs.get(position).getPath());
+    }
+    if (mediaPlayer != null)
+    {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
+        mediaPlayer.start();
+    }
+    else
+    {
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
+        mediaPlayer.start();
+    }
+    seekBar.setMax(mediaPlayer.getDuration() / 1000);
+    metaData(uri);
+}
+```
+
+- ##### [MediaPlayer](https://blog.csdn.net/zhaokx3/article/details/53432718?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160722327319724848150921%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=160722327319724848150921&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~hot_rank-7-53432718.pc_search_result_no_baidu_js&utm_term=mediaplayer&spm=1018.2118.3001.4449)
+
+#### 7. Implement the timeline_Durationbar  and FortmattedTime 
+
+- ##### [runOnUiThread](https://blog.csdn.net/cf8833/article/details/90297775?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160722366319724813238138%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=160722366319724813238138&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~hot_rank-4-90297775.pc_search_result_no_baidu_js&utm_term=runonuithread&spm=1018.2118.3001.4449) Thread collocate with [Handler](https://blog.csdn.net/wsq_tomato/article/details/80301851?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160722545519724847137907%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=160722545519724847137907&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~hot_rank-1-80301851.pc_search_result_no_baidu_js&utm_term=handler&spm=1018.2118.3001.4449)
 
 
 
+# **> Read Songs From Phone Part - 6 | Button Config**
+
+- ##### Read the song_name and artist to the PlayerActivity, Commit the FUNC of playing and resuming the music
+
+#### 1. Add Metadata() in PlayerActivity.java
+
+```java
+private  void metaData(Uri uri)
+    {
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        retriever.setDataSource(uri.toString());
+        int durationTotal = Integer.parseInt(listSongs.get(position).getDuration()) / 1000;
+        duration_total.setText(formattedTime(durationTotal));
+        byte[] art = retriever.getEmbeddedPicture();
+        if (art != null)
+        {
+            Glide.with(this)
+                    .asBitmap()
+                    .load(art)
+                    .into(cover_art);
+        }
+        else
+        {
+            Glide.with(this)
+                    .asBitmap()
+                    .load(R.drawable.bewedoc)
+                    .into(cover_art);
+        }
+    }
+```
+
+- ##### [Bitmap](https://blog.csdn.net/gdliweibing/article/details/43230349?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160731017219726891130654%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160731017219726891130654&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-43230349.pc_search_result_no_baidu_js&utm_term=android%20bitmap&spm=1018.2118.3001.4449)
+
+#### 2. Display song_name and artist_name
+
+```java
+song_name.setText(listSongs.get(position).getTitle());      
+artist_name.setText(listSongs.get(position).getArtist());
+```
+
+#### 3.
+
+#### 4.
+
+#### 5.
+
+#### 6.
 
