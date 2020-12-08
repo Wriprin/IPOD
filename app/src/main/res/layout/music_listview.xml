@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:androidd="http://schemas.android.com/apk/res/android"
+          androidd:id="@+id/label"
+          androidd:layout_width="match_parent"
+          androidd:layout_height="match_parent"
+          androidd:padding="10dp"></TextView>
