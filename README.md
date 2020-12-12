@@ -389,6 +389,9 @@ artist_name.setText(listSongs.get(position).getArtist());
 
 #### 3. Add three thread for the three button (play, prev, next)  in PlayerActivity.java
 
+<<<<<<< HEAD
+=======
+
 - ##### ctrl + o to implement method - onResume()
 
 # **> Read Songs From Phone Part - 7 | Animation APP**
@@ -461,19 +464,253 @@ public void onCompletion(MediaPlayer mp) {
 }
 ```
 
-# **> Read Songs From Phone Part - 8 |  Delete A File, Shuffle And Repeat**
-
-## TO Be Continue......
-
-#### 1.
-
-#### 2.
-
-#### 3.
-
-#### 4.
 
 
+# **> Read Songs From Phone Part - 7 | Animation APP**
+
+- ##### implement the animation of song_fading out and in, autoplay the next_song when current_songis done.
+
+#### 1. Add the ImageAnimation()
+
+```java
+//the animation of songs_changing
+public void ImageAnimation(final Context context, final ImageView imageView, final Bitmap bitmap)
+{
+    Animation animOut = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
+    final Animation animIn = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+    animOut.setAnimationListener(new Animation.AnimationListener() {
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            Glide.with(context).load(bitmap).into(imageView);
+            animIn.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            imageView.startAnimation(animIn);
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+    });
+    imageView.startAnimation(animOut);
+}
+```
+
+#### 2. Implement MediaPlayer.OnCompletionListener in PlayerActivity.java
+
+```java
+public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
+```
+
+#### 3. Implement the method for the FUNC of autoplay
+
+```java
+@Override
+public void onCompletion(MediaPlayer mp) {
+    nextBtnClicked();
+    if (mediaPlayer != null)
+    {
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
+        mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(this);
+    }
+}
+```
+
+# **> Read Songs From Phone Part - 8 |  Shuffle, Repeat And Delete A File**
+
+#### 1.  Implement in MainActivity.java
+
+```java
+static boolean shuffleBoolean = false, repeatBoolean = false;
+```
 
 
 
+#### 2. 	shuffleBtn.setOnClickListener()	
+
+> #### 	Same as the ***repeatBtn***  
+
+```java
+shuffleBtn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        if (shuffleBoolean)
+        {
+            shuffleBoolean = false;
+            shuffleBtn.setImageResource(R.drawable.ic_shuffle_off);
+        }
+        else
+        {
+            shuffleBoolean = true;
+            shuffleBtn.setImageResource(R.drawable.ic_shuffle_on);
+        }
+    }
+});
+```
+
+
+
+#### 3. Modify position in Prev or NextBtn 
+
+```java
+if (shuffleBoolean && !repeatBoolean)
+{
+    position = getRandom(listSongs.size() - 1);
+}
+else if (!shuffleBoolean && !repeatBoolean)
+{
+    position = ((position - 1) < 0 ? (listSongs.size() - 1) : (position - 1));
+}
+```
+
+#### Random:
+
+```java
+private int getRandom(int i) {
+    Random random = new Random();
+    return random.nextInt(i + 1);		//i => listsongs.size
+}
+```
+
+
+
+#### 4. Add a vectorAssest about ic_baseline_more.xml for delete action in music_items.xml
+
+```xml
+<ImageView
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+    android:id="@+id/menuMore"
+    android:src="@drawable/ic_baseline_more"
+    android:layout_alignParentEnd="true"
+    android:padding="10dp"/>
+```
+
+
+
+#### 5. New Android Resource Directory		
+
+> #####  Directory name: menu
+>
+> #####  Resource type: menu 
+
+#### 	Then New Resource file in menu directory
+
+> ##### popup.xml
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Delete"
+        android:id="@+id/delete"
+        app:showAsAction="never"/>
+</menu>
+```
+
+#### 6. Implement the method in MusicAdapter.java
+
+```java
+holder.menuMore.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(final View view) {
+        PopupMenu popupMenu = new PopupMenu(mContext, view);
+        popupMenu.getMenuInflater().inflate(R.menu.popup, popupMenu.getMenu());
+        popupMenu.show();
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId())
+                {
+                    case R.id.delete:
+                        Toast.makeText(mContext, "Delete Clicked!!!", Toast.LENGTH_SHORT).show();
+                        deleteFile(position, view);
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+});
+```
+
+```java
+private void deleteFile(int position, View v)
+{
+    Uri contentUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+            Long.parseLong(mFiles.get(position).getId()));      //  content://
+    File file = new File(mFiles.get(position).getPath());
+    boolean deleted = file.delete();//delete your file
+    if (deleted)
+    {
+        mContext.getContentResolver().delete(contentUri, null, null);
+        mFiles.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mFiles.size());
+        Snackbar.make(v, "File Deleted:", Snackbar.LENGTH_LONG).show();
+    }
+    else    //maybe file in sd-card
+        {
+            Snackbar.make(v, "Can't be Deleted:", Snackbar.LENGTH_LONG).show();
+
+        }
+}
+```
+
+
+
+#### 7. Add String "id" in MainActivity.java and MusicFiles.java for delete(method) to find the song.
+
+```java
+public class MusicFiles {
+    private String path;
+    private String title;
+    private String artist;
+    private String album;
+    private String duration;
+    private String id;
+
+    public MusicFiles(String path, String title, String artist, String album, String duration, String id) {
+        this.path = path;
+        this.title = title;
+        this.artist = artist;
+        this.album = album;
+        this.duration = duration;
+        this.id = id;
+    }
+```
+
+```java
+while (cursor.moveToNext())
+{
+    String album = cursor.getString(0);
+    String title = cursor.getString(1);
+    String duration = cursor.getString(2);
+    String path = cursor.getString(3);
+    String artist = cursor.getString(4);
+    String id = cursor.getString(5);
+
+    MusicFiles musicFiles = new MusicFiles(path, title, artist, album, duration, id);
+```
