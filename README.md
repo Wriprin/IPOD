@@ -389,8 +389,6 @@ artist_name.setText(listSongs.get(position).getArtist());
 
 #### 3. Add three thread for the three button (play, prev, next)  in PlayerActivity.java
 
-<<<<<<< HEAD
-=======
 
 - ##### ctrl + o to implement method - onResume()
 
