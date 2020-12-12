@@ -643,3 +643,102 @@ while (cursor.moveToNext())
 
     MusicFiles musicFiles = new MusicFiles(path, title, artist, album, duration, id);
 ```
+
+
+
+# > Read Songs From Phone Part - 9 | Album Fragment Part
+
+- ##### Commit the layout of Album and tied to the songs
+
+#### 1. New Resource File "album_item" and add cardview in Design search box
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/album_items"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    android:layout_margin="10dp"
+    android:layout_height="200dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:id="@+id/relative_layout">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:id="@+id/album_image"
+            android:src="@mipmap/ic_launcher"/>
+        
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/album_name"
+            android:layout_alignParentBottom="true"
+            android:text="Album"
+            android:textColor="#ffffff"
+            android:singleLine="true"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+```
+
+
+
+#### 2. Copy the inflater in SongsFragment.java to AlbumFragment.java
+
+```java
+    RecyclerView recyclerView;
+    AlbumAdapter albumAdapter;
+```
+
+```java
+    recyclerView = view.findViewById(R.id.recyclerView);
+    recyclerView.setHasFixedSize(true);
+
+    if (!(musicFiles.size() < 1))
+    {
+    	albumAdapter = new AlbumAdapter(getContext(),musicFiles);
+    	recyclerView.setAdapter(albumAdapter);
+    	recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+    }
+```
+
+
+
+#### 3. Modify the fragment_album.xml
+
+```xml
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"
+        android:background="#1C1C1C"/>
+```
+
+
+
+#### 4. New AlbumAdapter.java and implement it. (Copy something of MusicAdapter.java)
+
+```java
+public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyHolder> 
+```
+
+
+
+#### 5.
+
+
+
+#### 6.

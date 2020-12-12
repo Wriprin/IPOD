@@ -1,4 +1,4 @@
-package com.example.mymusic.DAO;
+package io.wriprin.android.ipod.DAO;
 
 public class User {
     private String password;

@@ -1,4 +1,4 @@
-package com.example.mymusic.DAO;
+package io.wriprin.android.ipod.DAO;
 
 import java.sql.*;
 
