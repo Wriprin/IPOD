@@ -392,76 +392,6 @@ artist_name.setText(listSongs.get(position).getArtist());
 
 - ##### ctrl + o to implement method - onResume()
 
-# **> Read Songs From Phone Part - 7 | Animation APP**
-
-- ##### implement the animation of song_fading out and in, autoplay the next_song when current_songis done.
-
-#### 1. Add the ImageAnimation()
-
-```java
-//the animation of songs_changing
-public void ImageAnimation(final Context context, final ImageView imageView, final Bitmap bitmap)
-{
-    Animation animOut = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
-    final Animation animIn = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
-    animOut.setAnimationListener(new Animation.AnimationListener() {
-        @Override
-        public void onAnimationStart(Animation animation) {
-
-        }
-
-        @Override
-        public void onAnimationEnd(Animation animation) {
-            Glide.with(context).load(bitmap).into(imageView);
-            animIn.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-            imageView.startAnimation(animIn);
-        }
-
-        @Override
-        public void onAnimationRepeat(Animation animation) {
-
-        }
-    });
-    imageView.startAnimation(animOut);
-}
-```
-
-#### 2. Implement MediaPlayer.OnCompletionListener in PlayerActivity.java
-
-```java
-public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
-```
-
-#### 3. Implement the method for the FUNC of autoplay
-
-```java
-@Override
-public void onCompletion(MediaPlayer mp) {
-    nextBtnClicked();
-    if (mediaPlayer != null)
-    {
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
-        mediaPlayer.start();
-        mediaPlayer.setOnCompletionListener(this);
-    }
-}
-```
-
 
 
 # **> Read Songs From Phone Part - 7 | Animation APP**
@@ -541,7 +471,6 @@ public void onCompletion(MediaPlayer mp) {
 ```java
 static boolean shuffleBoolean = false, repeatBoolean = false;
 ```
-
 
 
 #### 2. 	shuffleBtn.setOnClickListener()	
