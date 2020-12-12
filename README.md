@@ -736,9 +736,3 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyHolder>
 ```
 
 
-
-#### 5.
-
-
-
-#### 6.
