@@ -822,3 +822,204 @@ protected void onResume() {
 }
 ```
 
+
+
+
+
+# > Read Songs From Phone Part - 11 | Play Album Files
+
+- #### Play the songs in Ablum list.
+
+### 1. When click the songs, JMP to the PlayerActivity.java
+
+```java
+holder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(mContext, PlayerActivity.class);
+        intent.putExtra("sender", "albumDetails");
+        intent.putExtra("position", position);
+        mContext.startActivity(intent);
+    }
+});
+```
+
+
+
+### 2. Get Intent in PlayerActivity.java
+
+```java
+String sender = getIntent().getStringExtra("sender");
+if (sender != null && sender.equals("albumDetails"))
+{
+    listSongs = albumFiles;
+}
+else
+{
+    listSongs = mFiles;
+}
+```
+
+
+
+
+
+# > Read Songs From Phone Part - 12 | Search Files Filter List
+
+
+
+### 1. New Menu Resource File (file name: search)
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="search"
+        android:id="@+id/search_option"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+</menu>
+```
+
+- #### [showAsAction](https://blog.csdn.net/zengdejie123/article/details/50431920?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-2.control)
+
+### 2. Instantiation of the Search in MainActivity.java
+
+```java
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.search, menu);
+    return super.onCreateOptionsMenu(menu);
+}
+```
+
+
+
+### 3. Add implement of Query
+
+```java
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {}
+```
+
+
+
+### 4. Implement the FUCN
+
+```java
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.search, menu);
+    MenuItem menuItem = menu.findItem(R.id.search_option);
+    SearchView searchView = (SearchView) menuItem.getActionView();
+    searchView.setOnQueryTextListener(this);
+    return super.onCreateOptionsMenu(menu);
+}
+```
+
+```java
+@Override
+public boolean onQueryTextSubmit(String query) {
+    return false;
+}
+
+@Override
+public boolean onQueryTextChange(String newText) {
+    String userInput = newText.toLowerCase();
+    ArrayList<MusicFiles> myFiles = new ArrayList<>();
+    for (MusicFiles song : musicFiles)
+    {
+        if (song.getTitle().toLowerCase().contains(userInput))
+        {
+            myFiles.add(song);
+        }
+    }
+}
+```
+
+### 5. Create a updateList() in MusicAdapter.java
+
+```java
+void updateList(ArrayList<MusicFiles> musicFilesArrayList)
+{
+    mFiles = new ArrayList<>();
+    mFiles.addAll(musicFilesArrayList);
+    notifyDataSetChanged();
+}
+```
+
+[notifyDataSetChanged()](https://blog.csdn.net/thomassamul/article/details/81150774?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
+
+
+
+### 6. Change the MusicAdapter in SongsFragment.java to static
+
+```java
+static MusicAdapter musicAdapter;
+```
+
+
+
+### 7. Use the method
+
+```java
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String userInput = newText.toLowerCase();
+        ArrayList<MusicFiles> myFiles = new ArrayList<>();
+        for (MusicFiles song : musicFiles)
+        {
+            if (song.getTitle().toLowerCase().contains(userInput))
+            {
+                myFiles.add(song);
+            }
+        }
+    }
+```
+
+​																																👇***change***👇
+
+```java
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String userInput = newText.toLowerCase();
+        ArrayList<MusicFiles> myFiles = new ArrayList<>();
+        for (MusicFiles song : musicFiles)
+        {
+            if (song.getTitle().toLowerCase().contains(userInput))
+            {
+                myFiles.add(song);
+            }
+        }
+        SongsFragment.musicAdapter.updateList(myFiles);
+        return true;
+    }
+```
+
+### 8. Change the GetIntentMethod() in PlayerAcitvity.java for the search_songslist can play only in  its own list.
+
+```java
+private void getIntentMethod() {
+    position = getIntent().getIntExtra("position",-1);
+    String sender = getIntent().getStringExtra("sender");
+    if (sender != null && sender.equals("albumDetails"))
+    {
+        listSongs = albumFiles;
+    }
+    else
+    {
+        listSongs = musicFiles; ===> Change to the "mFiles"
+    }
+```
+
+​																																👇***change***👇
+
+```java
+else
+{
+    listSongs = mFiles;
+}
+```
