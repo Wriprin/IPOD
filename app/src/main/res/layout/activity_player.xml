@@ -31,19 +31,23 @@
             android:text="Now Playing"
             android:textColor="@color/colorAccent"
             android:layout_toEndOf="@id/back_btn"
-            android:layout_toStartOf="@+id/menu_btn"
+
             android:gravity="center_horizontal"
             android:background="@android:color/transparent"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/menu_btn"
-            android:src="@drawable/ic_menu"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
+<!--            android:layout_toEndOf="@id/back_btn"-->
+<!--            android:layout_toStartOf="@+id/menu_btn"-->
+
+
+<!--        <ImageView-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:id="@+id/menu_btn"-->
+<!--            android:src="@drawable/ic_menu"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_centerVertical="true"/>-->
         
     </RelativeLayout>
 
