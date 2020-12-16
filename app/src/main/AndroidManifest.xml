@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.wriprin.android.ipod">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -14,12 +15,18 @@
         <activity android:name=".AlbumDetails"></activity>
         <activity android:name=".PlayerActivity" />
         <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:label="Registration"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".LoginSucess"></activity>
     </application>
 
 </manifest>
