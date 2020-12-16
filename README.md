@@ -396,7 +396,7 @@ artist_name.setText(listSongs.get(position).getArtist());
 
 # **> Read Songs From Phone Part - 7 | Animation APP**
 
-- #### implement the animation of song_fading out and in, autoplay the next_song when current_songis done.
+- #### implement the animation of song_fading out and in, autoplay the next_song when current_song is done.
 
 ### 1. Add the ImageAnimation()
 
